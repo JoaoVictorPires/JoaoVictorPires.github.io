@@ -63,3 +63,9 @@ nav a:hover{
 header h1{
     color: black;
 }
+.proj{
+    display: flex;
+    text-align:center;
+    justify-content: flex-start;
+    gap: 10px;
+}
