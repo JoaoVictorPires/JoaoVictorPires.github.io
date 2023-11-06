@@ -69,3 +69,7 @@ header h1{
     justify-content: flex-start;
     gap: 10px;
 }
+
+.proj li p:hover{
+    color: white;
+}
