@@ -82,3 +82,28 @@ header h1 {
     color: #333;
     text-align: center;
 }
+
+.direitos {
+    text-align: center;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    header {
+        text-align: left;
+    }
+
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
