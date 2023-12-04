@@ -1,25 +1,28 @@
-body{
+body {
     color: black;
     background: #7CCD7C;
     font-family: Arial, Helvetica, sans-serif;
 }
-ul{
+
+ul {
     display: flex;
     justify-content: space-between;
     list-style-type: none;
     align-items: center;
     padding: 16px;
-    
+
 }
 
-a{
+a {
     color: black;
     text-decoration: none;
 }
-header{
+
+header {
     margin-top: 80px;
 }
-header img{
+
+header img {
     object-fit: cover;
     width: 150px;
     height: 150px;
@@ -27,42 +30,50 @@ header img{
     border: 5px solid white;
 }
 
-.center{
+.center {
     text-align: center;
-    color: black;
-}
-img{
-    width: 40px;
-    height: 40px;
-}
-footer{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    
-}
-footer a{
-    margin: 20px;
-    text-align: center;
-}
-footer p{
-    margin-top: 2px;
-    color: black;
-}
-footer p:hover{
-    color: white;
-}
-.container{
-    padding: 0pc 50px;
-}
-nav a:hover{
-    color: white;
-}
-header h1{
     color: black;
 }
 
-.contat{
+img {
+    width: 40px;
+    height: 40px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+footer a {
+    margin: 20px;
+    text-align: center;
+}
+
+footer p {
+    margin-top: 2px;
+    color: black;
+}
+
+footer p:hover {
+    color: white;
+}
+
+.container {
+    padding: 0pc 50px;
+}
+
+nav a:hover {
+    color: white;
+}
+
+header h1 {
+    color: black;
+}
+
+.contat {
     border: 2px solid black;
     box-shadow: 0 3px 10px;
     border-radius: 30px;

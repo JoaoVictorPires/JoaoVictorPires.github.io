@@ -22,7 +22,8 @@ label {
     margin-bottom: 5px;
 }
 
-input, textarea {
+input,
+textarea {
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #cccccc;
@@ -47,10 +48,10 @@ button:hover {
     padding: 20px;
     text-align: center;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0 ,0);
+    box-shadow: 0 0 10px rgba(0, 0, 0);
 }
 
-.container > h1 {
+.container>h1 {
     margin-bottom: 10px;
 }
 
