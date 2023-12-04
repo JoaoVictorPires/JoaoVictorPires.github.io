@@ -4,7 +4,8 @@ function submitForm() {
     let email = document.getElementById('email').value;
     let message = document.getElementById('message').value;
 
-    if(validateForm(name, surname, email, message)){
+
+    if (validateForm(name, surname, email, message)) {
         alert(name + ' ' + surname + ' ' + email + ' ' + message);
 
         document.getElementById('name').value = '';
@@ -16,34 +17,36 @@ function submitForm() {
         document.getElementById('message').value = '';
         document.getElementById('message').removeAttribute("class", "error");
     };
-    
+
+
+
 };
 
 function validateForm(name, surname, email, message) {
-    if(name === null || name === undefined || name === ""){
+    if (name === null || name === undefined || name === "") {
         document.getElementById('name').setAttribute("class", "error");
-        alert('Invalid Name!');
+        alert('Nome inválido!');
         return false;
     };
-    if(surname === null || surname === undefined || surname === ""){
+    if (surname === null || surname === undefined || surname === "") {
         document.getElementById('surname').setAttribute("class", "error");
-        alert('Invalid Surname!');
+        alert('Sobrenome inválido!');
         return false;
     };
-    if(email === null || email === undefined || email === "" || !validateEmail(email)){
+    if (email === null || email === undefined || email === "" || !validateEmail(email)) {
         document.getElementById('email').setAttribute("class", "error");
-        alert('Invalid E-mail!');
+        alert('E-mail inválido!');
         return false;
     };
-    if(message === null || message === undefined || message === ""){
+    if (message === null || message === undefined || message === "") {
         document.getElementById('message').setAttribute("class", "error");
-        alert('Invalid Message!');
+        alert('Mensagem inválida!');
         return false;
     };
     return true;
 };
 
 function validateEmail(email) {
-    let emailPattern =  /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
-    return emailPattern.test(email); 
+    let emailPattern = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+    return emailPattern.test(email);
 };
