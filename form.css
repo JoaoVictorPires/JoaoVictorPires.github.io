@@ -1,60 +1,81 @@
-* {
-    margin: 0;
-    padding: 0;
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --accent1: linear-gradient(135deg,#6ee7b7 0%, #3b82f6 100%);
+  --glass: rgba(255,255,255,0.06);
+  --muted:#9aa4b2;
+  --text:#e6eef8;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #7CCD7C;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Inter",system-ui;
+  padding:40px;
+  min-height:100vh;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+form{
+  max-width:480px;
+  margin:auto;
+  background:var(--glass);
+  padding:30px 40px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow:0 6px 30px rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
 }
 
-label {
-    margin-bottom: 5px;
+label{
+  display:block;
+  margin-bottom:6px;
+  color:var(--muted);
+  font-size:13px;
 }
 
-input,
-textarea {
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
+input,textarea{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.03);
+  resize:none;
+  color:var(--text);
+  outline:none;
+  transition:.25s;
+  margin-bottom:12px;
+}
+input:focus,textarea:focus{
+  border-color:#3b82f6;
+  background:rgba(255,255,255,0.07);
 }
 
-button {
-    background-color: green;
-    color: white;
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    cursor: pointer;
+button{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  background:var(--accent1);
+  color:#0b1220;
+  transition:.25s;
+  margin-top:10px;
+}
+button:hover{
+  transform:translateY(-3px);
 }
 
-button:hover {
-    background-color: #29942e;
+.icon{
+  width:10px;
+  height:24px;
+  opacity:0.85;
+  transition:0.2s ease;
+}
+.icon:hover{
+  opacity:1;
+  transform:scale(1.1);
 }
 
-.container {
-    background-color: #FFFFFF;
-    padding: 20px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0);
-}
-
-.container>h1 {
-    margin-bottom: 10px;
-}
-
-.error {
-    border: 1px solid red;
-}
