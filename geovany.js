@@ -1,12 +1,3 @@
-/* Frontend JavaScript — funcionalidade completa
-   - produtos dinâmicos
-   - cálculo da Receita do Ponto de Equilíbrio (RPE) com mix
-   - gráfico (Chart.js) com linha do RPE
-   - export CSV
-   - animações e feedbacks
-*/
-
-// ---------- Helpers ----------
 const $ = sel => document.querySelector(sel);
 const $$ = sel => Array.from(document.querySelectorAll(sel));
 
@@ -15,12 +6,10 @@ const currency = n => {
   return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 };
 
-// ---------- Estado ----------
 let produtos = [];
 let nextId = 1;
 let chart = null;
 
-// ---------- Elementos ----------
 const produtosBody = $("#produtosBody");
 const btnAdd = $("#btnAdd");
 const btnCalcular = $("#btnCalcular");
@@ -35,7 +24,6 @@ const insightsEl = $("#insights");
 const periodoSelect = $("#periodo");
 const ctx = document.getElementById("chart").getContext("2d");
 
-// ---------- Inicialização ----------
 function criarProdutoLinha(p) {
   const tr = document.createElement("tr");
   tr.dataset.id = p.id;
@@ -50,11 +38,9 @@ function criarProdutoLinha(p) {
     <td><button class="remove">Remover</button></td>
   `;
 
-  // Eventos nas inputs
   const inputs = tr.querySelectorAll("input");
   inputs.forEach(inp => {
     inp.addEventListener("input", () => {
-      // atualizar produto no state
       const id = Number(tr.dataset.id);
       const prod = produtos.find(x => x.id === id);
       if (!prod) return;
@@ -63,12 +49,10 @@ function criarProdutoLinha(p) {
       prod.pv = parseFloat(tr.querySelector(".pv").value) || 0;
       prod.qtd = parseFloat(tr.querySelector(".qtd").value) || 0;
       atualizarLinha(tr, prod);
-      // atualiza resultados em tempo real
       calcularEAtualizar(false);
     });
   });
 
-  // Remover
   tr.querySelector(".remove").addEventListener("click", () => {
     const id = Number(tr.dataset.id);
     produtos = produtos.filter(p => p.id !== id);
@@ -94,7 +78,7 @@ function adicionarProduto(name = `Produto ${nextId}`, cv = 0, pv = 0, qtd = 0) {
   atualizarLinha(tr, prod);
 }
 
-// Adiciona 5 produtos iniciais (fácil pra professor testar)
+// Adicionamos 5 produtos iniciais para facilitar o seu teste, seguindo o arquivo word.
 for (let i = 0; i < 5; i++) adicionarProduto(`Produto ${i + 1}`);
 
 // ---------- Cálculo (mix de produtos) ----------
@@ -117,7 +101,6 @@ function calcularRPE(produtosList, custoFixo) {
     mcTotal += mcUnit * qtd;
   });
 
-  // segurança
   if (receitaTotal <= 0 || mcTotal <= 0) return { receitaTotal, mcTotal, imc: 0, rpe: Infinity };
 
   const imc = mcTotal / receitaTotal;
@@ -126,19 +109,16 @@ function calcularRPE(produtosList, custoFixo) {
   return { receitaTotal, mcTotal, imc, rpe };
 }
 
-// ---------- UI Update ----------
 function calcularEAtualizar(animar = true) {
   const custoFixo = parseFloat(custoFixoInput.value) || 0;
-  const periodo = periodoSelect.value; // (não altera cálculo, só label/ajuste futuro)
+  const periodo = periodoSelect.value;
 
   const res = calcularRPE(produtos, custoFixo);
 
-  // exibir
   receitaAtualEl.textContent = currency(res.receitaTotal);
   mcTotalEl.textContent = currency(res.mcTotal);
   rpeEl.textContent = isFinite(res.rpe) ? currency(res.rpe) : "—";
 
-  // progress
   let pct = 0;
   if (isFinite(res.rpe) && res.rpe > 0 && res.receitaTotal > 0) {
     pct = Math.min(100, Math.round((res.receitaTotal / res.rpe) * 100));
@@ -149,7 +129,6 @@ function calcularEAtualizar(animar = true) {
   progressBar.style.width = `${pct}%`;
   pctEl.textContent = `${pct}%`;
 
-  // insights
   let insightsHtml = "";
   if (!isFinite(res.rpe) || res.imc === 0) {
     insightsHtml = `<p>Preencha custos, preços e quantidades válidas para calcular o ponto de equilíbrio.</p>`;
@@ -159,7 +138,6 @@ function calcularEAtualizar(animar = true) {
       <p><strong>Receita atual:</strong> ${currency(res.receitaTotal)} — você precisa alcançar <strong>${currency(res.rpe)}</strong> para cobrir custos fixos de ${currency(custoFixo)}.</p>
     `;
 
-    // sugestões rápidas
     if (res.receitaTotal < res.rpe) {
       const faltante = res.rpe - res.receitaTotal;
       insightsHtml += `<p style="color:#ffb86b"><strong>Você está R$ ${faltante.toFixed(2)} abaixo</strong> da RPE. Considere aumentar preço, reduzir CV, ou vender mais unidades.</p>`;
@@ -169,18 +147,14 @@ function calcularEAtualizar(animar = true) {
   }
   insightsEl.innerHTML = insightsHtml;
 
-  // atualizar gráfico
   atualizarGrafico(res);
 
-  // anima efeito pulse quando atingir RPE
   const rpeCard = rpeEl.parentElement;
   if (pct >= 100) {
-    // pequeno destaque
     rpeEl.animate([{ transform: "scale(1)" }, { transform: "scale(1.03)" }, { transform: "scale(1)" }], { duration: 900 });
   }
 }
 
-// ---------- Gráfico (Chart.js) ----------
 function criarGrafico() {
   if (chart) chart.destroy();
 
@@ -219,19 +193,15 @@ function criarGrafico() {
 }
 
 function atualizarGrafico(calcRes) {
-  // atualiza labels/dados
   if (!chart) criarGrafico();
 
   chart.data.labels = produtos.map(p => p.name);
   chart.data.datasets[0].data = produtos.map(p => (Number(p.pv) || 0) * (Number(p.qtd) || 0));
 
-  // adiciona linha do ponto de equilíbrio (como dataset do tipo line)
   const rpeValue = isFinite(calcRes.rpe) ? calcRes.rpe : 0;
-  // cria array com valor rpe para cada label
-  const lineData = produtos.map(() => rpeValue / Math.max(1, produtos.length)); // para visual só
+  const lineData = produtos.map(() => rpeValue / Math.max(1, produtos.length));
 
-  // remove dataset extra se houver
-  // manter dataset[1] como linha RPE
+
   if (chart.data.datasets.length > 1) {
     chart.data.datasets.splice(1, 1);
   }
@@ -250,7 +220,7 @@ function atualizarGrafico(calcRes) {
   chart.update('active');
 }
 
-// ---------- Export CSV ----------
+
 function exportCSV() {
   if (produtos.length === 0) return alert("Sem produtos para exportar.");
   const header = ["Produto","CV","PV","Quantidade","MC Unit","Receita"].join(";");
@@ -271,7 +241,7 @@ function exportCSV() {
   URL.revokeObjectURL(url);
 }
 
-// ---------- Eventos globais ----------
+
 btnAdd.addEventListener("click", () => {
   adicionarProduto();
   criarGrafico();
@@ -285,7 +255,7 @@ btnExport.addEventListener("click", () => {
   exportCSV();
 });
 
-// atalho Enter para calcular
+
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
@@ -293,8 +263,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// inicializar gráfico e UI
+
 criarGrafico();
 calcularEAtualizar(false);
 
-/* FIM */
