@@ -103,7 +103,7 @@ function calcularRPE(produtosList, custoFixo) {
 
   if (receitaTotal <= 0 || mcTotal <= 0) return { receitaTotal, mcTotal, imc: 0, rpe: Infinity };
 
-  const imc = mcTotal / receitaTotal;
+  const imc = +(mcTotal / receitaTotal).toFixed(4);
   const rpe = custoFixo / imc;
 
   return { receitaTotal, mcTotal, imc, rpe };
@@ -219,15 +219,38 @@ function atualizarGrafico(calcRes) {
 
   chart.update('active');
 }
+function gerarDRE(res, custoFixo) {
+
+  const receitaPE = res.rpe;
+
+  const pctCustoVariavel = 1 - res.imc;
+  const custoVariavelPE = receitaPE * pctCustoVariavel;
+
+  const margemContribuicaoPE = receitaPE - custoVariavelPE;
+
+  const resultado = margemContribuicaoPE - custoFixo;
+
+  return {
+    receitaPE,
+    pctCustoVariavel,
+    custoVariavelPE,
+    margemContribuicaoPE,
+    custoFixo,
+    resultado
+  };
+}
+
 
 
 function exportCSV() {
   if (produtos.length === 0) return alert("Sem produtos para exportar.");
-  const header = ["Produto","CV","PV","Quantidade","MC Unit","Receita"].join(";");
+  const header = ["Produto","CV","PV","Quantidade","MC Unit","Receita","Custos Variaveis","Resultado DRE"].join(";");
   const rows = produtos.map(p => {
     const mc = (Number(p.pv) - Number(p.cv)) || 0;
     const receita = (Number(p.pv) * Number(p.qtd)) || 0;
-    return [p.name, p.cv.toFixed(2), p.pv.toFixed(2), p.qtd, mc.toFixed(2), receita.toFixed(2)].join(";");
+    const custoVariavel = (Number(p.cv) * Number(p.qtd)) || 0;
+    const dre = gerarDRE(calcularRPE(produtos, parseFloat(custoFixoInput.value) || 0), parseFloat(custoFixoInput.value) || 0);
+    return [p.name, p.cv.toFixed(2), p.pv.toFixed(2), p.qtd, mc.toFixed(2), receita.toFixed(2), custoVariavel.toFixed(2), dre.resultado.toFixed(2)].join(";");
   });
   const csv = [header, ...rows].join("\n");
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
