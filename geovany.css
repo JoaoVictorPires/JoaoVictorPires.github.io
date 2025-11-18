@@ -80,6 +80,8 @@ body{
 
 /* Inputs row */
 .inputs-row{display:flex;gap:12px;align-items:center;margin-top:14px}
+.inputs-rows{display:flex;margin-left: auto;align-self: flex-end;gap:12px;align-items:center;margin-top:14px}
+
 .label-inline{display:flex;flex-direction:column;font-size:13px;color:var(--muted)}
 .label-inline input, .label-inline select{margin-top:6px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:var(--glass);color:inherit}
 

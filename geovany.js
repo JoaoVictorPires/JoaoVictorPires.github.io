@@ -11,7 +11,8 @@ let nextId = 1;
 let chart = null;
 
 const produtosBody = $("#produtosBody");
-const btnAdd = $("#btnAdd");
+const btnAdds = $("#btnAdds");
+
 const btnCalcular = $("#btnCalcular");
 const btnExport = $("#btnExport");
 const custoFixoInput = $("#custoFixo");
@@ -265,7 +266,7 @@ function exportCSV() {
 }
 
 
-btnAdd.addEventListener("click", () => {
+btnAdds.addEventListener("click", () => {
   adicionarProduto();
   criarGrafico();
 });
