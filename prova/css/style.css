@@ -29,6 +29,19 @@ header h1 {
     font-size: 1.8rem;
     letter-spacing: 1px;
 }
+.menor{
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #e6eef8;
+    padding: 0.43rem 0.86rem !important;
+    border-radius: 8px;
+    font-size: 1.07rem !important;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: auto !important;
+    margin-top: 0 !important;
+}
 
 /* ====== NAVBAR ====== */
 nav {
