@@ -286,7 +286,9 @@ document.addEventListener("keydown", (e) => {
     calcularEAtualizar();
   }
 });
-
+function voltar(){
+    window.history.back();
+}
 
 criarGrafico();
 calcularEAtualizar(false);
