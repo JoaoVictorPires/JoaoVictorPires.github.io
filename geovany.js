@@ -287,7 +287,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 function voltar(){
-    window.history.back();
+    document.location.href="index.html";
 }
 
 criarGrafico();
