@@ -14,13 +14,16 @@ body {
     min-height: 100vh;
 }
 
+
 /* ====== HEADER ====== */
 header {
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.05);
     backdrop-filter: blur(10px);
     color: #e6eef8;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 1.5rem 1rem;
     box-shadow: 0 4px 25px rgba(0,0,0,0.35);
 }
@@ -28,6 +31,7 @@ header {
 header h1 {
     font-size: 1.8rem;
     letter-spacing: 1px;
+    margin: 0 auto;
 }
 .menor{
     background: rgba(255,255,255,0.04);
