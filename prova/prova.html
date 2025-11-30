@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculos Financeiros</title>
+    <link rel="stylesheet" href="prova/css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Calculadora Financeira</h1>
+    </header>
+
+    <nav>
+        <button onclick="mostrarSecao('pe')">Ponto de Equilíbrio</button>
+        <button onclick="mostrarSecao('lucratividade')">Lucratividade</button>
+        <button onclick="mostrarSecao('rentabilidade')">Rentabilidade</button>
+        <button onclick="mostrarSecao('chart')">Gráfico</button>
+    </nav>
+
+    <main>
+        <!-- Ponto de Equilíbrio -->
+        <section id="pe" class="secao ativa">
+            <h2>Ponto de Equilíbrio</h2>
+            <label>Gasto Fixo:</label>
+            <input type="number" id="gastoFixo" placeholder="Ex: 1000"><br>
+            <label>Preço de Venda:</label>
+            <input type="number" id="precoVenda" placeholder="Ex: 50"><br>
+            <label>Gasto Variável:</label>
+            <input type="number" id="gastoVariavel" placeholder="Ex: 30"><br>
+            <button onclick="calcularPE()">Calcular</button>
+            <p id="resultadoPE"></p>
+        </section>
+
+        <!-- Lucratividade -->
+        <section id="lucratividade" class="secao">
+            <h2>Lucratividade</h2>
+            <label>Lucro:</label>
+            <input type="number" id="lucro" placeholder="Ex: 2000"><br>
+            <label>Receita de Venda:</label>
+            <input type="number" id="receitaVenda" placeholder="Ex: 8000"><br>
+            <button onclick="calcularLucratividade()">Calcular</button>
+            <p id="resultadoLucratividade"></p>
+        </section>
+
+        <!-- Rentabilidade -->
+        <section id="rentabilidade" class="secao">
+            <h2>Rentabilidade</h2>
+            <label>Lucro:</label>
+            <input type="number" id="lucroRent" placeholder="Ex: 3000"><br>
+            <label>Capital Investido:</label>
+            <input type="number" id="capitalInvestido" placeholder="Ex: 15000"><br>
+            <button onclick="custoDeVendaUnitario()">Calcular</button>
+            <p id="resultadoRentabilidade"></p>
+        </section>
+    </main>
+
+    <section id="grafico" class="secao">
+        <h2>Visualização dos Resultados</h2>
+        <canvas id="resultChart"></canvas>
+    </section>
+
+    <!-- Importar Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <footer>
+        Desenvolvido por <span>J&L Developments</span> © 2025
+    </footer>
+
+    <script src="prova/js/script.js"></script>
+</body>
+
+</html>
