@@ -172,3 +172,7 @@ function todos() {
 
     precoDeVendaDivisor(custo, markupDivisor);
 }
+function voltar() {
+    window.history.back();
+
+}
